@@ -14,6 +14,7 @@ public class Booking {
 	private int tableSize;
 	private LocalDate date;
 	private LocalTime time;
+	private int tableId;
 
 	public Booking() {
 	}
@@ -43,6 +44,14 @@ public class Booking {
 
 	public void setTableSize(int tableSize) {
 		this.tableSize = tableSize;
+	}
+
+	public int getTableId() {
+		return tableId;
+	}
+
+	public void setTableId(int tableId) {
+		this.tableId = tableId;
 	}
 
 	public LocalDate getDate() {

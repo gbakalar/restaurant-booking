@@ -40,7 +40,7 @@ Password:	(blank)
 
 curl -X POST http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"customerName":"Gordan","tableSize":4,"date":"2025-06-15","time":"18:00"}'
 
-curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": 1, "customerName":"Gordan","tableSize":5,"date":"2025-06-15","time":"20:00"}'
+curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": some-id}, "customerName":"Gordan","tableSize":5,"date":"2025-06-15","time":"20:00"}'
 
 curl "http://localhost:8080/bookings?date=2025-06-15"
 

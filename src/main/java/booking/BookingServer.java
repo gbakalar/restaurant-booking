@@ -56,6 +56,11 @@ public class BookingServer {
 					}
 					// booking must have and existing ID in order to be modified
 					booking = service.modifyBooking(booking);
+					if (booking == null) {
+						response.status(400);
+						response.write("Cant find free table for updated booking.");
+						return;
+					}
 					response.status(201);
 					// send back modified booking
 					response.write(gson.toJson(booking));
@@ -67,6 +72,11 @@ public class BookingServer {
 						return;
 					}
 					booking = service.addBooking(booking);
+					if (booking == null) {
+						response.status(400);
+						response.write("Cant find free table.");
+						return;
+					}
 					response.status(201);
 					// send it back with the ID
 					response.write(gson.toJson(booking));
@@ -82,6 +92,6 @@ public class BookingServer {
 					response.write(gson.toJson(service.getBookingsForDate(localDate)));
 				}).withHttpPort(8080).start();
 
-		System.out.println("Server is listening at " + server.uri());
+		System.out.println("Server is running:" + server.uri());
 	}
 }
