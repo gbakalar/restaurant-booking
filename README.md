@@ -21,11 +21,26 @@ Each booking contains:
 - Date (ISO format: `YYYY-MM-DD`)
 - Time (`HH:mm`)
 
-## 🧪 Testing with cURL
+## 📦 Build & Run
 
-curl -X POST http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"customerName":"Alice","tableSize":4,"date":"2025-06-15","time":"18:00"}'
+mvn clean package
+mvn exec:java -Dexec.mainClass=booking.BookingServer
 
-curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": 1, "customerName":"Alice Updated","tableSize":5,"date":"2025-06-15","time":"20:00"}'
+## 🌐 URLs
+API base URL: http://localhost:8080
+Use this as the base for all endpoints (/bookings, etc.)
+
+H2 Console: http://localhost:8082
+JDBC settings:
+URL:		jdbc:h2:file:~/bookings/db
+Username:	sa
+Password:	(blank)
+
+## 🧪 Testing with curl
+
+curl -X POST http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"customerName":"Gordan","tableSize":4,"date":"2025-06-15","time":"18:00"}'
+
+curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": 1, "customerName":"Gordan","tableSize":5,"date":"2025-06-15","time":"20:00"}'
 
 curl "http://localhost:8080/bookings?date=2025-06-15"
 
