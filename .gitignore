@@ -1,0 +1,29 @@
+# Eclipse-specific files
+/.settings/
+/.project
+.classpath
+
+# Maven build output
+/target/
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA (optional, in case you open with it)
+/.idea/
+/*.iml
+
+# Maven wrapper files (optional to ignore)
+/mvnw
+/mvnw.cmd
+/.mvn/
+
+# Generated files
+*.class
+
+# VS Code (if used)
+/.vscode/
