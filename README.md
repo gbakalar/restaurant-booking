@@ -1,5 +1,4 @@
 # Restaurant Booking API
-
 This is a simple Java-based RESTful API for a restaurant booking system, built with:
 
 - [MuServer](https://muserver.io/) – lightweight HTTP server
@@ -8,8 +7,7 @@ This is a simple Java-based RESTful API for a restaurant booking system, built w
 - Gson – for JSON parsing
 - Maven – for build and dependency management
 
-## 🚀 Features
-
+## Features
 - **POST /bookings** – Create a new booking
 - **GET /bookings?date=YYYY-MM-DD** – Get all bookings for a specific date
 - **PUT /bookings** – Update an existing booking
@@ -21,30 +19,28 @@ Each booking contains:
 - Date (ISO format: `YYYY-MM-DD`)
 - Time (`HH:mm`)
 
-## 📦 Build & Run
+## Build & Run
+- mvn clean package
+- mvn exec:java -Dexec.mainClass=booking.BookingServer
 
-mvn clean package
-mvn exec:java -Dexec.mainClass=booking.BookingServer
+## API Base URL
+Use this as the base for all endpoints (e.g., `/bookings`, etc.):
+<http://localhost:8080>
 
-## 🌐 URLs
-API base URL: http://localhost:8080
-Use this as the base for all endpoints (/bookings, etc.)
+## H2 Console
+Access the H2 database console at:
+<http://localhost:8082>
 
-H2 Console: http://localhost:8082
-JDBC settings:
-URL:		jdbc:h2:file:~/bookings/db
-Username:	sa
-Password:	(blank)
+** use the following JDBC Settings:**
+- URL: `jdbc:h2:file:~/bookings/db`
+- Username: `sa`
+- Password: *(leave blank)*
 
-## 🧪 Testing with curl
+## Testing with curl
+- curl -X POST http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"customerName":"Gordan","tableSize":4,"date":"2025-06-15","time":"18:00"}'
 
-curl -X POST http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"customerName":"Gordan","tableSize":4,"date":"2025-06-15","time":"18:00"}'
+- curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": some-id}, "customerName":"Gordan","tableSize":5,"date":"2025-06-15","time":"20:00"}'
 
-curl -X PUT http://localhost:8080/bookings -H "Content-Type: application/json" -d '{"id": some-id}, "customerName":"Gordan","tableSize":5,"date":"2025-06-15","time":"20:00"}'
+- curl "http://localhost:8080/bookings?date=2025-06-15"
 
-curl "http://localhost:8080/bookings?date=2025-06-15"
-
-curl -X DELETE http://localhost:8080/bookings/1
-
-
-
+- curl -X DELETE http://localhost:8080/bookings/1

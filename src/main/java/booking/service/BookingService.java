@@ -16,10 +16,7 @@ public class BookingService {
 	// @formatter:off
 	private final List<Table> tables = Arrays.asList(
 			new Table(1, 4),
-			new Table(2, 4),
-			new Table(3, 5),
-			new Table(4, 4),
-			new Table(5, 6));
+			new Table(2, 3));
 	// @formatter:on
 
 	public BookingService(BookingRepository repository) {
@@ -66,24 +63,32 @@ public class BookingService {
 		return repository.findByDate(date);
 	}
 
+	// this is the key point
 	private Optional<Table> findFreeTable(List<Booking> bookings, Booking booking) {
-		LocalTime endTime = booking.getTime().plusHours(2);
-
+		Table freeTable = null;
 		for (Table table : tables) {
+			// @formatter:off
 			boolean isAvailable = bookings.stream()
-					.filter(b -> b.getTableId() == table.getId() && b.getDate().equals(booking.getDate())).noneMatch(
-							b -> intervalsOverlap(b.getTime(), b.getTime().plusHours(2), booking.getTime(), endTime));
+					.filter(b -> b.getTableId() == table.getId() && b.getDate().equals(booking.getDate()))
+					.noneMatch(b -> intervalsOverlap(
+							b.getTime(), b.getTime().plusHours(1).plusMinutes(59),
+							booking.getTime(), booking.getTime().plusHours(1).plusMinutes(59))
+					);
+			// @formatter:on
 
 			if (isAvailable && table.getSize() >= booking.getTableSize()) {
-				return Optional.of(table);
+				if (freeTable == null || freeTable.getSize() > table.getSize()) {
+					freeTable = table;
+				}
 			}
 		}
-
+		if (freeTable != null) {
+			return Optional.of(freeTable);
+		}
 		return Optional.empty();
 	}
 
 	private boolean intervalsOverlap(LocalTime start1, LocalTime end1, LocalTime start2, LocalTime end2) {
 		return !end1.isBefore(start2) && !start1.isAfter(end2);
 	}
-
 }
