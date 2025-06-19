@@ -1,24 +1,35 @@
 package booking.service;
 
-import org.junit.*;
-import org.mockito.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-import booking.data.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import booking.SpringConfig;
+import booking.data.Booking;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = SpringConfig.class)
 public class BookingServiceTest {
 
-	private BookingRepository repo;
-	private BookingService service;
+	@Autowired
+	private BookingService bookSvc;
+
 
 	@Before
 	public void setup() {
-		repo = Mockito.mock(BookingRepository.class);
-		service = new BookingService(repo);
 	}
 
 	@Test
 	public void testBooking() {
 		// TODO
+		bookSvc.addBooking(new Booking("Gordan", 4, LocalDate.now(), LocalTime.of(18, 0)));
 	}
 
 }

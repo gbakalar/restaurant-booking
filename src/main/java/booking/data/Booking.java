@@ -5,6 +5,7 @@ import java.time.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name="booking")
 public class Booking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +15,7 @@ public class Booking {
 	private int tableSize;
 	private LocalDate date;
 	private LocalTime time;
-	private int tableId;
+	private Long tableId;
 
 	public Booking() {
 	}
@@ -46,11 +47,11 @@ public class Booking {
 		this.tableSize = tableSize;
 	}
 
-	public int getTableId() {
+	public Long getTableId() {
 		return tableId;
 	}
 
-	public void setTableId(int tableId) {
+	public void setTableId(Long tableId) {
 		this.tableId = tableId;
 	}
 
